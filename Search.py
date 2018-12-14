@@ -4,8 +4,7 @@ import pandas as pd
 import requests
 
 
-def saveImage(cityID):
-
+def saveImage(cityID,key):
 
 
     print(cityID[2])
@@ -16,10 +15,10 @@ def saveImage(cityID):
         cityID[i] = re.sub(' ','',cityID[i])
         cityID[i] = re.sub('\r','',cityID[i])
         cityID[i] = re.sub('\n','',cityID[i])
-    image_backgroud_url = 'https://maps.googleapis.com/maps/api/staticmap?&center='  + cityID[2] + ',' + cityID[3] + '&zoom=10&format=png&maptype=roadmap&style=feature:road|visibility:off&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=AIzaSyCBj1rX0X4g7KaGueU1du_l4jzGfIQO1NY'
-    image_road_url = 'https://maps.googleapis.com/maps/api/staticmap?&center='  + cityID[2] + ',' + cityID[3] +  '&zoom=10&format=png&maptype=roadmap&style=visibility:off&style=feature:road|visibility:on&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=AIzaSyCBj1rX0X4g7KaGueU1du_l4jzGfIQO1NY'
-    image_roadmap_url = 'https://maps.googleapis.com/maps/api/staticmap?&center=' + cityID[2] + ',' + cityID[3] + '&zoom=10&format=png&maptype=roadmap&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=AIzaSyCBj1rX0X4g7KaGueU1du_l4jzGfIQO1NY'
-    image_satellite_url = 'https://maps.googleapis.com/maps/api/staticmap?&center=' + cityID[2] + ',' + cityID[3] + '&zoom=10&format=png&maptype=satellite&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=AIzaSyCBj1rX0X4g7KaGueU1du_l4jzGfIQO1NY'
+    image_backgroud_url = 'https://maps.googleapis.com/maps/api/staticmap?&center='  + cityID[2] + ',' + cityID[3] + '&zoom=10&format=png&maptype=roadmap&style=feature:road|visibility:off&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=' + key
+    image_road_url = 'https://maps.googleapis.com/maps/api/staticmap?&center='  + cityID[2] + ',' + cityID[3] +  '&zoom=10&format=png&maptype=roadmap&style=visibility:off&style=feature:road|visibility:on&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=' + key
+    image_roadmap_url = 'https://maps.googleapis.com/maps/api/staticmap?&center=' + cityID[2] + ',' + cityID[3] + '&zoom=10&format=png&maptype=roadmap&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=' + key
+    image_satellite_url = 'https://maps.googleapis.com/maps/api/staticmap?&center=' + cityID[2] + ',' + cityID[3] + '&zoom=10&format=png&maptype=satellite&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=' + key
     satellite = requests.get(image_satellite_url)
     backgroud = requests.get(image_backgroud_url)
     road = requests.get(image_road_url)
@@ -34,15 +33,15 @@ def saveImage(cityID):
         f.write(satellite.content)
 
 
-def saveImageTwo(cityID, id):
+def saveImageTwo(cityID, id,key):
     image_backgroud_url = 'https://maps.googleapis.com/maps/api/staticmap?&center=' + cityID[
-        0] + '&zoom=10&format=png&maptype=roadmap&style=feature:road|visibility:off&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=AIzaSyCBj1rX0X4g7KaGueU1du_l4jzGfIQO1NY'
+        0] + '&zoom=10&format=png&maptype=roadmap&style=feature:road|visibility:off&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=' + key
     image_road_url = 'https://maps.googleapis.com/maps/api/staticmap?&center=' + cityID[
-        0] + '&zoom=10&format=png&maptype=roadmap&style=visibility:off&style=feature:road|visibility:on&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=AIzaSyCBj1rX0X4g7KaGueU1du_l4jzGfIQO1NY'
+        0] + '&zoom=10&format=png&maptype=roadmap&style=visibility:off&style=feature:road|visibility:on&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=' + key
     image_roadmap_url = 'https://maps.googleapis.com/maps/api/staticmap?&center=' + cityID[
-        0] + '&zoom=10&format=png&maptype=roadmap&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=AIzaSyCBj1rX0X4g7KaGueU1du_l4jzGfIQO1NY'
+        0] + '&zoom=10&format=png&maptype=roadmap&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=' + key
     image_satellite_url = 'https://maps.googleapis.com/maps/api/staticmap?&center=' + cityID[
-        0] + '&zoom=10&format=png&maptype=satellite&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=AIzaSyCBj1rX0X4g7KaGueU1du_l4jzGfIQO1NY'
+        0] + '&zoom=10&format=png&maptype=satellite&style=element:labels%7Cvisibility:off&size=640x640&scale=2&key=' + key
     backgroud = requests.get(image_backgroud_url)
     road = requests.get(image_road_url)
     roadmap = requests.get(image_roadmap_url)
@@ -115,4 +114,5 @@ t5.join()
 t6.join()
 t7.join()
 print("Done")
+
 '''

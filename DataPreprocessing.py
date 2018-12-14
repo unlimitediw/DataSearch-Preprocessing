@@ -114,8 +114,8 @@ class CSVPurer(object):
         self.data = self.data[indices]
 
 
-newPurer = CSVPurer('/Users/unlimitediw/PycharmProjects/GoogleSearch/Data/OldData/CityFeature300.csv')
+newPurer = CSVPurer('/Users/unlimitediw/PycharmProjects/Search&DataProcess/Data/OldData/CityFeature300.csv')
 newPurer.removeRow([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 newPurer.removeSpecificRow('2014CitiesFeature')
 newPurer.NanProcessing('replenishByMedian', 4, NanFormat='..')
-newPurer.saveCSV('../GoogleSearch/Data/OldData/CityFeatureRemoveNan.csv')
+newPurer.saveCSV('../Search&DataProcess/Data/OldData/CityFeatureRemoveNan.csv')
