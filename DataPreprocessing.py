@@ -64,6 +64,8 @@ class CSVPurer(object):
                 self.data[i][0] = self.data[i][0][9:]
             self.data = np.delete(self.data, removeList, axis=0)
 
+
+
     # reset the column order. The len(order) should be equal to the #column
     def switchColumn(self, order):
         self.data = self.data[:, order]
@@ -113,6 +115,21 @@ class CSVPurer(object):
         indices = np.random.choice(self.data.shape[0], self.data.shape[0], replace=False)
         self.data = self.data[indices]
 
+    def special(self):
+        dic = {}
+        for i in range(len(self.data)):
+            if self.data[i][6] not in dic:
+                dic[self.data[i][6]] = [i]
+            else:
+                dic[self.data[i][6]].append(i)
+        rankKey = sorted(dic.keys())
+        print(rankKey)
+        newIndice = []
+        for i in range(len(rankKey)):
+            newIndice += dic[rankKey[i]]
+        self.data = self.data[newIndice]
+
+
 '''
 # This is some example:
 newPurer = CSVPurer('/Users/unlimitediw/PycharmProjects/Search&DataProcess/Data/OldData/CityFeature300.csv')
@@ -121,3 +138,7 @@ newPurer.removeSpecificRow('2014CitiesFeature')
 newPurer.NanProcessing('replenishByMedian', 4, NanFormat='..')
 newPurer.saveCSV('../Search&DataProcess/Data/OldData/CityFeatureRemoveNan.csv')
 '''
+
+newPurer = CSVPurer('/Users/unlimitediw/Downloads/MyCarClass.csv')
+newPurer.special()
+newPurer.saveCSV('/Users/unlimitediw/Downloads/treatedMyCarClass.csv',resLabel = ['filename', 'file_size', 'file_attributes', 'region_count', 'region_id', 'region_shape_attributes', 'region_attributes'])
