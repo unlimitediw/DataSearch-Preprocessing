@@ -45,6 +45,13 @@ class CSVPurer(object):
                 self.data[i][0] = self.data[i][0][9:]
             self.data = np.delete(self.data,removeList,axis=0)
 
+    def removeRowByValue(self,idx,val = None):
+        removeList = self.data[:, idx] != val
+        self.data = self.data[removeList]
+        for i in range(len(self.data)):
+            self.data[i][0] = i+1
+        #self.data = np.delete(self.data, removeList, axis=0)
+
     # switch column order of the self.data
     def switchColumn(self,order):
         self.data = self.data[:,order]
@@ -92,8 +99,23 @@ b.removeRow([],[0,3])
 b.switchColumn([1,0,2,3])
 b.saveCSV('./Data/CitiesPLL.csv')
 '''
+
+'''
 a = CSVPurer('./Data/CityFeatures2014.csv')
 a.addFeatureByCityName('./Data/CityPopLaLg.csv')
 a.addFeatureByCityName('./Data/CityGDP.csv')
 a.DataRandomize()
 a.saveCSV('./Data/Final229CitiesData.csv',resLabel = ['CityName','Area','GreenAreaPerPers', 'Polycentricity','PopulationInCore','#Gov','#GovInCore','Population','Latitude','Longitude','GDP'])
+'''
+
+a = CSVPurer('./Data/OldData/PopulationLatitudeLongitudeNoKorea.csv')
+a.removeRow(columnList=[2,3,4,5])
+a.saveCSV('./Data/OldData/PopulationLabel.csv',resLabel=['idx','population'])
+
+
+'''
+# Remove 'Republic of Korea
+a = CSVPurer('./Data/OldData/PopulationLatitudeLongitudeNoKorea.csv')
+a.removeRowByValue(3,"Democratic People's Republic of Korea")
+a.saveCSV('./Data/OldData/PopulationLatitudeLongitudeNoKorea.csv',resLabel=['idx','population','city','country','latitude','longitude'])
+'''
