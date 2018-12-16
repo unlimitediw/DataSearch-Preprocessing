@@ -64,7 +64,6 @@ class CSVPurer(object):
                 self.data[i][0] = self.data[i][0][9:]
             self.data = np.delete(self.data, removeList, axis=0)
 
-<<<<<<< HEAD
     def removeRowByValue(self,idx,val = None):
         removeList = self.data[:, idx] != val
         self.data = self.data[removeList]
@@ -75,11 +74,10 @@ class CSVPurer(object):
     # switch column order of the self.data
     def switchColumn(self,order):
         self.data = self.data[:,order]
-=======
+
     # reset the column order. The len(order) should be equal to the #column
     def switchColumn(self, order):
         self.data = self.data[:, order]
->>>>>>> 6b5f88a08e36409e87ffdc37c4e9aa127551a1aa
 
     # newPath should point to a pure .csv files with same #row of self.data.
     # All new features (except tag) should be add to the tail and use switchColumn() to adjust it later.
@@ -126,33 +124,11 @@ class CSVPurer(object):
         indices = np.random.choice(self.data.shape[0], self.data.shape[0], replace=False)
         self.data = self.data[indices]
 
-'''
-<<<<<<< HEAD
-
-'''
-a = CSVPurer('./Data/CityFeatures2014.csv')
-a.addFeatureByCityName('./Data/CityPopLaLg.csv')
-a.addFeatureByCityName('./Data/CityGDP.csv')
-a.DataRandomize()
-a.saveCSV('./Data/Final229CitiesData.csv',resLabel = ['CityName','Area','GreenAreaPerPers', 'Polycentricity','PopulationInCore','#Gov','#GovInCore','Population','Latitude','Longitude','GDP'])
-'''
-
-a = CSVPurer('./Data/OldData/PopulationLatitudeLongitudeNoKorea.csv')
-a.removeRow(columnList=[2,3,4,5])
-a.saveCSV('./Data/OldData/PopulationLabel.csv',resLabel=['idx','population'])
 
 
-'''
-# Remove 'Republic of Korea
-a = CSVPurer('./Data/OldData/PopulationLatitudeLongitudeNoKorea.csv')
-a.removeRowByValue(3,"Democratic People's Republic of Korea")
-a.saveCSV('./Data/OldData/PopulationLatitudeLongitudeNoKorea.csv',resLabel=['idx','population','city','country','latitude','longitude'])
-=======
 # This is some example:
 newPurer = CSVPurer('/Users/unlimitediw/PycharmProjects/Search&DataProcess/Data/OldData/CityFeature300.csv')
 newPurer.removeRow([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 newPurer.removeSpecificRow('2014CitiesFeature')
 newPurer.NanProcessing('replenishByMedian', 4, NanFormat='..')
 newPurer.saveCSV('../Search&DataProcess/Data/OldData/CityFeatureRemoveNan.csv')
->>>>>>> 6b5f88a08e36409e87ffdc37c4e9aa127551a1aa
-'''
